@@ -1,8 +1,8 @@
-public class Tour {
-    public Tour (String nom, String couleur,int ligne,int colonne)
+public class Tour extends Piece
+ {
+    public Tour (String nom, String couleur)
     {
         super(nom,couleur);
-        Position pos=new Position(ligne,colonne);
     }
 
     public  boolean estValide (Position depart, Position arrivee)
@@ -17,5 +17,5 @@ public class Tour {
         }
         return valide;
     };
-    
+
 };

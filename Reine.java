@@ -1,8 +1,7 @@
-public class Reine {
-    public Reine (String nom, String couleur,int ligne,int colonne)
+public class Reine extends Piece {
+    public Reine (String nom, String couleur)
     {
         super(nom,couleur);
-        Position pos=new Position(ligne,colonne);
     }
 
     public  boolean estValide (Position depart, Position arrivee)
@@ -20,5 +19,5 @@ public class Reine {
         }
         return valide;
     };
-    
+
 };

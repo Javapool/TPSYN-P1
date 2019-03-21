@@ -6,6 +6,18 @@
     "configurations": [
         {
             "type": "java",
+            "name": "CodeLens (Launch) - Echiquier",
+            "request": "launch",
+            "mainClass": "Echiquier"
+        },
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - Echiquier",
+            "request": "launch",
+            "mainClass": "projetSynthese.Echiquier"
+        },
+        {
+            "type": "java",
             "name": "Debug (Launch) - Current File",
             "request": "launch",
             "mainClass": "${file}",

@@ -1,17 +1,17 @@
 /**
  * Pion
  */
-public class Pion {
+public class Pion extends Piece
+ {
     boolean positionDepart=true;
-    public Pion (String nom, String couleur,int ligne,int colonne)
+    public Pion (String nom, String couleur)
     {
         super(nom,couleur);
-        Position pos=new Position(ligne,colonne);
     }
 
     public  boolean estValide (Position depart, Position arrivee){
         boolean valide=false;
-        if( bonsens(depart,arrivee)){  
+        if( bonsens(depart,arrivee)){
             //valide que le mouvement est fait a lintérieur de l'échiquier
             if (arrivee.getLigne()>=0 && arrivee.getColonne()>=0 && arrivee.getLigne()<=7 && arrivee.getColonne()<=7 ){
                 //valide que le mouvement est de 1 case en x ou y ou les deux.
@@ -26,16 +26,16 @@ public class Pion {
                         this.positionDepart=false;
                     }
                 }
-            }   
-        
+            }
+
         }
         return valide;
     }
-   
+
     public  boolean bonSens (Position depart, Position arrivee){
         boolean valide=false;
         //valide si le pion noir descend ou le pion blanc monte
-        if(this.couleur=="noir"){
+        if(this.getCouleur()=="noir"){
             if(arrivee.getLigne()-depart.getLigne()>0){
                 valide=true;
             }

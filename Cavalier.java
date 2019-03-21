@@ -1,11 +1,11 @@
 
-public class Cavalier {
-    public Cavalier (String nom, String couleur,int ligne,int colonne)
+public class Cavalier extends Piece
+ {
+    public Cavalier (String nom, String couleur)
     {
         super(nom,couleur);
-        Position pos=new Position(ligne,colonne);
     }
-    
+
     public  boolean estValide (Position depart, Position arrivee)
     {
         boolean valide=false;
@@ -16,6 +16,5 @@ public class Cavalier {
         }
         return valide;
     };
-    
+
 };
-    

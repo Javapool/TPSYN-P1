@@ -1,8 +1,7 @@
-public class Roi {
-    public Roi (String nom, String couleur,int ligne,int colonne)
+public class Roi extends Piece {
+    public Roi (String nom, String couleur)
     {
         super(nom,couleur);
-        Position pos=new Position(ligne,colonne);
     }
 
     public  boolean estValide (Position depart, Position arrivee)
@@ -15,5 +14,5 @@ public class Roi {
         }
         return valide;
     };
-    
+
 };
