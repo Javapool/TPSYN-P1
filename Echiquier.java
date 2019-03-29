@@ -66,15 +66,15 @@ public boolean captureParUnPionPossible ( Position depart,Position arrivee )
 public boolean cheminPossible ( Position  depart , Position arrivee)
 {
 
-	if(!getCase(depart.x,depart.y).getPiece().estValidE(depart,arrivee))
+	if(!getCase(depart.getColonne(),depart.getLigne()).getPiece().estValidE(depart,arrivee))
 	{
 		return false;
 	}
-	if(type(getCase(depart.x,depart.y).getPiece())==Pion)
+	if(getCase(depart.getColonne(),depart.getLigne()).getPiece().getNom().charAt(0)=='p')
 	{
 
 	}
-	if(getcase(arrivee.x,arrivee.y).estOccupee())
+	if(getcase(arrivee.getColonne(),arrivee.getLigne()).estOccupee())
 	{
 		return false;
 	}
