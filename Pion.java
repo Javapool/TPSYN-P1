@@ -11,7 +11,7 @@ public class Pion extends Piece
 
     public  boolean estValide (Position depart, Position arrivee){
         boolean valide=false;
-        if( bonsens(depart,arrivee)){
+        if(bonSens(depart,arrivee)){
             //valide que le mouvement est fait a lintérieur de l'échiquier
             if (arrivee.getLigne()>=0 && arrivee.getColonne()>=0 && arrivee.getLigne()<=7 && arrivee.getColonne()<=7 ){
                 //valide que le mouvement est de 1 case en x ou y ou les deux.
