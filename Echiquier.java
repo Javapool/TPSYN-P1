@@ -66,20 +66,21 @@ public boolean captureParUnPionPossible ( Position depart,Position arrivee )
 public boolean cheminPossible ( Position  depart , Position arrivee)
 {
 
-	if(!getCase(depart.x,depart.y).getPiece().estValidE(depart,arrivee))
+	if(!getCase(depart.getLigne(),depart.getColonne()).getPiece().estValide(depart,arrivee))
 	{
 		return false;
 	}
-	if(type(getCase(depart.x,depart.y).getPiece())==Pion)
+	if(getCase(depart.getLigne(),depart.getColonne()).getPiece().getNom()=="p1")
 	{
 
 	}
-	if(getcase(arrivee.x,arrivee.y).estOccupee())
+	if(getCase(arrivee.getLigne(),arrivee.getColonne()).estOccupee())
 	{
 		return false;
 	}
 
-	if(type(getcase(depart.x,depart.y).getPiece())!=Cavalier)
+	if(getCase(depart.getColonne(),depart.getLigne()).getPiece().getNom()!="c1" 
+	&& getCase(depart.getColonne(),depart.getLigne()).getPiece().getNom()!="c2")
 	{
 		//abs() retourne la valeur absolue d'un nombre(voir définition à la fin d'échiquier)
 		int Vecteurx=(arrivee.x-depart.x);
