@@ -59,32 +59,41 @@ return location[ligne][colonne];
 //M�thode � compl�ter
 public boolean captureParUnPionPossible ( Position depart,Position arrivee )
   {
+		Piece pieceChoisie=getCase(depart.getColonne(),depart.getLigne()).getPiece();
+			if (pieceChoisie.norme(depart,arrivee)==2){
+				if (getCase(arrivee.getColonne(),arrivee.getLigne())){
+
+				}
+		}
 	  return true;
   }
 
 //M�thode � compl�ter
 public boolean cheminPossible ( Position  depart , Position arrivee)
 {
-
-	if(!getCase(depart.getLigne(),depart.getColonne()).getPiece().estValide(depart,arrivee))
-	{
-		return false;
-	}
-	if(getCase(depart.getLigne(),depart.getColonne()).getPiece().getNom()=="p1")
-	{
-
-	}
-	if(getCase(arrivee.getLigne(),arrivee.getColonne()).estOccupee())
+	Piece pieceChoisie=getCase(depart.getColonne(),depart.getLigne()).getPiece();
+	if(!pieceChoisie.estValide(depart,arrivee))
 	{
 		return false;
 	}
 
-	if(getCase(depart.getColonne(),depart.getLigne()).getPiece().getNom()!="c1" 
-	&& getCase(depart.getColonne(),depart.getLigne()).getPiece().getNom()!="c2")
+	if(getCase(arrivee.getColonne(),arrivee.getLigne()).estOccupee())
+	{
+		return false;
+	}
+
+	if(pieceChoisie.getNom().charAt(0)=='p')
+	{
+			if(getCase(arrivee.getColonne(),arrivee.getLigne()).getPiece()!=null)
+		{
+			return false;
+		}
+	}
+	else if(pieceChoisie.getNom().charAt(0)!='c')
 	{
 		//abs() retourne la valeur absolue d'un nombre(voir définition à la fin d'échiquier)
-		int Vecteurx=(arrivee.x-depart.x);
-		int Vecteury=(arrivee.y-depart.y);
+		int Vecteurx=(arrivee.getColonne()-depart.getColonne());
+		int Vecteury=(arrivee.getLigne()-depart.getLigne());
 		//signe x ou y prend une valeur dans -1,0,1 pour déterminer la direction du mouvement en x et en y(0 étant nul)
 		int Signex;
 		int Signey;
@@ -104,7 +113,7 @@ public boolean cheminPossible ( Position  depart , Position arrivee)
 
 		//valide chaque case entre départ et arrivée pour voir si le chemin est bloqué
 		for (int i = 1; i < valeurMax; i++) {
-			if(getCase(depart.x+(i*Signex), depart.y+(i*Signey)).getPiece()!=null)
+			if(getCase(depart.getColonne()+(i*Signex), depart.getLigne()+(i*Signey)).getPiece()!=null)
 			{
 				return false;
 			}
