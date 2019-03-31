@@ -5,15 +5,16 @@ public class Echiquier implements MethodesEchiquier {
 private static final int HAUT_BOARD=8;
 private static final int LARG_BOARD=8;
 
+
 private Case location [][]=new Case[HAUT_BOARD][LARG_BOARD];
 
-  public Echiquier()
+public Echiquier()
   {
     for (int i = 0; i < HAUT_BOARD; i++)
     {
-      for (int j = 0; i < LARG_BOARD; i++)
+      for (int j = 0; j < LARG_BOARD; j++)
       {
-        location[i][j]=new Case();
+        this.location[i][j]=new Case();
       }
     }
   }
@@ -21,48 +22,48 @@ private Case location [][]=new Case[HAUT_BOARD][LARG_BOARD];
 //M�thode � compl�ter
 public void debuter()
 {
-int k;
-  for (k=0; k < 8; k++)
+
+  for (int k=0; k < 8; k++)
   {
-	location[1][k].ajouterPiece(new Pion("p" + String.valueOf(k+1), "noir"));
-	location[6][k].ajouterPiece(new Pion("p" + String.valueOf(k+1), "blanc"));
+	this.location[1][k].ajouterPiece(new Pion("p" + String.valueOf(k+1), "noir"));
+	this.location[6][k].ajouterPiece(new Pion("p" + String.valueOf(k+1), "blanc"));
 //Autres pions
   }
-  location[0][0].ajouterPiece(new Tour        ("t1", "noir"));
-  location[0][7].ajouterPiece(new Tour        ("t2", "noir"));
-  location[0][1].ajouterPiece(new Cavalier    ("c1", "noir"));
-  location[0][6].ajouterPiece(new Cavalier    ("c2", "noir"));
-  location[0][2].ajouterPiece(new Fou         ("f1", "noir"));
-  location[0][5].ajouterPiece(new Fou         ("f2", "noir"));
-  location[0][3].ajouterPiece(new Roi         ("k",  "noir"));
-  location[0][4].ajouterPiece(new Reine       ("q",  "noir"));
+  this.location[0][0].ajouterPiece(new Tour        ("t1", "noir"));
+  this.location[0][7].ajouterPiece(new Tour        ("t2", "noir"));
+  this.location[0][1].ajouterPiece(new Cavalier    ("c1", "noir"));
+	this.location[0][6].ajouterPiece(new Cavalier    ("c2", "noir"));
+  this.location[0][2].ajouterPiece(new Fou         ("f1", "noir"));
+  this.location[0][5].ajouterPiece(new Fou         ("f2", "noir"));
+  this.location[0][3].ajouterPiece(new Roi         ("k",  "noir"));
+  this.location[0][4].ajouterPiece(new Reine       ("r",  "noir"));
 
 //pièces noires
 
-  location[7][0].ajouterPiece(new Tour      ("p1", "blanc"));
-  location[7][7].ajouterPiece(new Tour      ("p1", "blanc"));
-  location[7][1].ajouterPiece(new Cavalier  ("c1", "blanc"));
-  location[7][6].ajouterPiece(new Cavalier  ("c1", "blanc"));
-  location[7][2].ajouterPiece(new Fou       ("f1", "blanc"));
-  location[7][5].ajouterPiece(new Fou       ("f1", "blanc"));
-  location[7][3].ajouterPiece(new Roi       ("k",  "blanc"));
-  location[7][4].ajouterPiece(new Reine     ("r",  "blanc"));
+	this.location[7][0].ajouterPiece(new Tour      ("t1", "blanc"));
+	this.location[7][7].ajouterPiece(new Tour      ("t1", "blanc"));
+	this.location[7][1].ajouterPiece(new Cavalier  ("c1", "blanc"));
+	this.location[7][6].ajouterPiece(new Cavalier  ("c1", "blanc"));
+	this.location[7][2].ajouterPiece(new Fou       ("f1", "blanc"));
+	this.location[7][5].ajouterPiece(new Fou       ("f1", "blanc"));
+	this.location[7][3].ajouterPiece(new Roi       ("k",  "blanc"));
+	this.location[7][4].ajouterPiece(new Reine     ("r",  "blanc"));
 
 
 }
 
 public Case getCase ( int ligne, int colonne )
 {
-return location[ligne][colonne];
+return this.location[ligne][colonne];
 }
 
 //M�thode � compl�ter
 public boolean captureParUnPionPossible ( Position depart,Position arrivee )
   {
-		Piece pieceChoisie=getCase(depart.getColonne(),depart.getLigne()).getPiece();
+		Piece pieceChoisie=this.getCase(depart.getColonne(),depart.getLigne()).getPiece();
 
-				if (getCase(arrivee.getColonne(),arrivee.getLigne()).getPiece()!=null&&
-				getCase(arrivee.getColonne(),arrivee.getLigne()).getPiece().getCouleur()!=pieceChoisie.getCouleur()){
+				if (this.getCase(arrivee.getColonne(),arrivee.getLigne()).getPiece()!=null&&
+				this.getCase(arrivee.getColonne(),arrivee.getLigne()).getPiece().getCouleur()!=pieceChoisie.getCouleur()){
 						return true;
 				}
 
@@ -75,13 +76,13 @@ public boolean cheminPossible ( Position  depart , Position arrivee)
 	if(depart==arrivee){
 		return true;
 	}
-	Piece pieceChoisie=getCase(depart.getColonne(),depart.getLigne()).getPiece();
+	Piece pieceChoisie=this.getCase(depart.getColonne(),depart.getLigne()).getPiece();
 	if(!pieceChoisie.estValide(depart,arrivee))
 	{
 		return false;
 	}
 
-	if(getCase(arrivee.getColonne(),arrivee.getLigne()).estOccupee())
+	if(this.getCase(arrivee.getColonne(),arrivee.getLigne()).estOccupee())
 	{
 		return false;
 	}
@@ -91,7 +92,7 @@ public boolean cheminPossible ( Position  depart , Position arrivee)
 	}
 	else if(pieceChoisie.getNom().charAt(0)=='p')
 	{
-			if(getCase(arrivee.getColonne(),arrivee.getLigne()).getPiece()!=null)
+			if(this.getCase(arrivee.getColonne(),arrivee.getLigne()).getPiece()!=null)
 		{
 			return false;
 		}
@@ -120,7 +121,7 @@ public boolean cheminPossible ( Position  depart , Position arrivee)
 
 		//valide chaque case entre départ et arrivée pour voir si le chemin est bloqué
 		for (int i = 1; i < valeurMax; i++) {
-			if(getCase(depart.getColonne()+(i*Signex), depart.getLigne()+(i*Signey)).getPiece()!=null)
+			if(this.getCase(depart.getColonne()+(i*Signex), depart.getLigne()+(i*Signey)).getPiece()!=null)
 			{
 				return false;
 			}
@@ -131,20 +132,20 @@ public boolean cheminPossible ( Position  depart , Position arrivee)
 
 public static void main ( String [] args )
   {
-  Echiquier e = new Echiquier ();
+  Echiquier e = new Echiquier();
   e.debuter();
-  afficher(e);
+  e.afficher();
 
   }
 
-public static void afficher(Echiquier board)
+public void afficher()
 {
 	System.out.println();
 	for (int i = 0; i < HAUT_BOARD; i++) {
 		for (int j = 0; j < LARG_BOARD; j++) {
-			if(board.getCase(i,j).getPiece()!=null)
+			if(this.getCase(i,j).getPiece()!=null)
 			{
-				System.out.printf("%5s",board.getCase(i,j).getPiece().getNom());
+				System.out.printf("%5s",this.getCase(i,j).getPiece().getNom());
 			}
 			else
 			{

@@ -16,10 +16,6 @@ public Piece getPiece ()
     {
     return piece;
     }
-public void setPiece ( Piece piece )
-{
-this.piece = piece;
-}
 
 //V�rifier si la prochaine position contient (oui ou non) une pi�ce
 public boolean estOccupee()

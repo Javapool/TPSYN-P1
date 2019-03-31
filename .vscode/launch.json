@@ -8,13 +8,15 @@
             "type": "java",
             "name": "CodeLens (Launch) - Echiquier",
             "request": "launch",
-            "mainClass": "Echiquier"
+            "mainClass": "Echiquier",
+            "console": "integratedTerminal"
         },
         {
             "type": "java",
             "name": "CodeLens (Launch) - Echiquier",
             "request": "launch",
-            "mainClass": "projetSynthese.Echiquier"
+            "mainClass": "projetSynthese.Echiquier",
+            "console": "integratedTerminal"
         },
         {
             "type": "java",
