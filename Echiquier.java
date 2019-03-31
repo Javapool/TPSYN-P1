@@ -60,17 +60,21 @@ return location[ligne][colonne];
 public boolean captureParUnPionPossible ( Position depart,Position arrivee )
   {
 		Piece pieceChoisie=getCase(depart.getColonne(),depart.getLigne()).getPiece();
-			if (pieceChoisie.norme(depart,arrivee)==2){
-				if (getCase(arrivee.getColonne(),arrivee.getLigne())){
 
+				if (getCase(arrivee.getColonne(),arrivee.getLigne()).getPiece()!=null&&
+				getCase(arrivee.getColonne(),arrivee.getLigne()).getPiece().getCouleur()!=pieceChoisie.getCouleur()){
+						return true;
 				}
-		}
-	  return true;
+
+	  return false;
   }
 
 //M�thode � compl�ter
 public boolean cheminPossible ( Position  depart , Position arrivee)
 {
+	if(depart==arrivee){
+		return true;
+	}
 	Piece pieceChoisie=getCase(depart.getColonne(),depart.getLigne()).getPiece();
 	if(!pieceChoisie.estValide(depart,arrivee))
 	{
@@ -82,7 +86,10 @@ public boolean cheminPossible ( Position  depart , Position arrivee)
 		return false;
 	}
 
-	if(pieceChoisie.getNom().charAt(0)=='p')
+	if (pieceChoisie.getNom().charAt(0)=='p'&&pieceChoisie.norme(depart,arrivee)==2){
+		return captureParUnPionPossible(depart, arrivee);
+	}
+	else if(pieceChoisie.getNom().charAt(0)=='p')
 	{
 			if(getCase(arrivee.getColonne(),arrivee.getLigne()).getPiece()!=null)
 		{
@@ -121,20 +128,7 @@ public boolean cheminPossible ( Position  depart , Position arrivee)
 	}
 	return true;
 }
-/*
-public boolean roquePossible (Position depart, Position arrivee )
-{
-}
 
-public boolean priseEnPassantPossible( Position depart, Position arrivee )
-{
-}
-
-public boolean promotionPossible (Position depart, Position arrivee)
-  {
-  if ( location [depart.getLigne()][depart.getColonne()].getPiece().getCouleur() == "blanc" ){}
-  }
-  */
 public static void main ( String [] args )
   {
   Echiquier e = new Echiquier ();
@@ -154,7 +148,7 @@ public static void afficher(Echiquier board)
 			}
 			else
 			{
-				System.out.printf("%5s","");
+				System.out.printf("%5s"," ");
 			}
 		}
 		System.out.println("\n");
