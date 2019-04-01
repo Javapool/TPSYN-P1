@@ -1,5 +1,4 @@
-
-//package projetSynthese;
+//package com.projetSynthese;
 
 public class Echiquier implements MethodesEchiquier {
 private static final int HAUT_BOARD=8;
@@ -129,14 +128,6 @@ public boolean cheminPossible ( Position  depart , Position arrivee)
 	}
 	return true;
 }
-
-public static void main ( String [] args )
-  {
-  Echiquier e = new Echiquier();
-  e.debuter();
-  e.afficher();
-
-  }
 
 public void afficher()
 {

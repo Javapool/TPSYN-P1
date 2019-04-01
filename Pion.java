@@ -35,7 +35,7 @@ public class Pion extends Piece
     public  boolean bonSens (Position depart, Position arrivee){
         boolean valide=false;
         //valide si le pion noir descend ou le pion blanc monte
-        if(this.getCouleur()=="noir"){
+        if(this.getCouleur()=="blanc"){
             if(arrivee.getLigne()-depart.getLigne()>0){
                 valide=true;
             }
