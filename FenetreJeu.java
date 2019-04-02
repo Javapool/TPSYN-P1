@@ -111,7 +111,7 @@ public class FenetreJeu extends JFrame
   {
 
   Piece pieceTampon;
-  ImageIcon iconeTampon;
+  Icon iconeTampon;
   int ligneClic;
   int colonneClic;
   Position depart, arrivee;
@@ -163,12 +163,12 @@ public class FenetreJeu extends JFrame
     champTexte.setText(couleurControle);
 	
 	//SUIVRE LES �TAPES DU DOCUMENT FOURNI SUR L�A
-  if(e.getCase(ligneClic, colonneClic).getPiece().getCouleur()==couleurControle && this.iconeTampon==null)  // 1er cas :
+  if(e.getCase(ligneClic, colonneClic).estOccupee(couleurControle) && this.pieceTampon==null)  // 1er cas :
 	{
     this.depart.setLigne(ligneClic);
     this.depart.setColonne(colonneClic);
-    iconeTampon=tab[ligneClic][colonneClic].getIcon();
-    pieceTampon=e.getCase(ligneClic,colonneClic).getPiece();
+    this.iconeTampon=tab[ligneClic][colonneClic].getIcon();
+    this.pieceTampon=e.getCase(ligneClic,colonneClic).getPiece();
 	//clique sur une case occupee , tampon vide : case Depart
     //initialiser position depart
     //prendre l'icone et la mettre dans le tampon, prendre la piece et la mettre dans le tampon
@@ -176,25 +176,36 @@ public class FenetreJeu extends JFrame
 	}
 	
     // 2�me cas : clique sur une case vide ; tampon plein case d'arrivee, pas de pion en diagonale
-    {//initialiser position d'arriv�e
-	 //v�rifier estValide(), exclue les pions en diagonale
-		{//v�rifier cheminPossible()
-			{//enlever la pi�ce du tampon et la mettre sur l'arriv�e
-			 //enlever d�finitivement la pi�ce du d�part
-			 //placer l'icone tampon sur la place d'arriv�e et l'enlever du tampon
-	
+    else if(!e.getCase(ligneClic,colonneClic).estOccupee()&&this.pieceTampon!=null){
+		//initialiser position d'arriv�e
+     	arrivee.setLigne(ligneClic);
+      	arrivee.setColonne(colonneClic);
+	 		//v�rifier estValide(), exclue les pions en diagonale
+			if(this.pieceTampon.estValide(depart, arrivee)){
+				//v�rifier cheminPossible()
+				if(e.cheminPossible(depart, arrivee)){
+				 //enlever la pi�ce du tampon et la mettre sur l'arriv�e
+				 	e.getCase(arrivee.getLigne(), arrivee.getColonne()).ajouterPiece(pieceTampon);
+					//enlever d�finitivement la pi�ce du d�part
+					e.getCase(depart.getLigne(), depart.getColonne()).ajouterPiece(null);
+					//placer l'icone tampon sur la place d'arriv�e et l'enlever du tampon
+					tab[arrivee.getLigne()][arrivee.getColonne()].setIcon(this.iconeTampon);
+					tab[depart.getLigne()][depart.getColonne()].setIcon(null);
+					this.iconeTampon=null;
+					this.pieceTampon=null;
 	//� compl�ter
-
-          alterne();//Change la couleur de la pi�ce
+          			alterne();//Change la couleur de la pi�ce
 			}
 		}
     }
 	  
     // 3�me cas : clique sur une case occupee et tampon plein : case d'arrivee + pion en diagonale
     //� compl�ter
-	{
-		{
-			{
+	else if(e.getCase(ligneClic,colonneClic).getPiece()!=null&&this.pieceTampon!=null){
+		arrivee.setLigne(ligneClic);
+      	arrivee.setColonne(colonneClic);
+		  if(this.pieceTampon.estValide(depart, arrivee)){
+			if(e.cheminPossible(depart, arrivee)){
           alterne();
             }
 		}
@@ -209,7 +220,8 @@ public class FenetreJeu extends JFrame
       
   }
   //else // 4e cas rien a faire tampon vide et case vide
-    {
+  else  {this.iconeTampon=null;
+		this.pieceTampon=null;
     }
     
   }

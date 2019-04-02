@@ -28,25 +28,25 @@ public void debuter()
 	this.location[6][k].ajouterPiece(new Pion("p" + String.valueOf(k+1), "blanc"));
 //Autres pions
   }
-  this.location[0][0].ajouterPiece(new Tour        ("t1", "noir"));
-  this.location[0][7].ajouterPiece(new Tour        ("t2", "noir"));
-  this.location[0][1].ajouterPiece(new Cavalier    ("c1", "noir"));
-	this.location[0][6].ajouterPiece(new Cavalier    ("c2", "noir"));
-  this.location[0][2].ajouterPiece(new Fou         ("f1", "noir"));
-  this.location[0][5].ajouterPiece(new Fou         ("f2", "noir"));
-  this.location[0][3].ajouterPiece(new Roi         ("k",  "noir"));
-  this.location[0][4].ajouterPiece(new Reine       ("r",  "noir"));
+  this.location[0][0].ajouterPiece(new Tour        ("t1", "blanc"));
+  this.location[0][7].ajouterPiece(new Tour        ("t2", "blanc"));
+  this.location[0][1].ajouterPiece(new Cavalier    ("c1", "blanc"));
+	this.location[0][6].ajouterPiece(new Cavalier    ("c2", "blanc"));
+  this.location[0][2].ajouterPiece(new Fou         ("f1", "blanc"));
+  this.location[0][5].ajouterPiece(new Fou         ("f2", "blanc"));
+  this.location[0][3].ajouterPiece(new Roi         ("r",  "blanc"));
+  this.location[0][4].ajouterPiece(new Reine       ("d",  "blanc"));
 
 //pièces noires
 
-	this.location[7][0].ajouterPiece(new Tour      ("t1", "blanc"));
-	this.location[7][7].ajouterPiece(new Tour      ("t1", "blanc"));
-	this.location[7][1].ajouterPiece(new Cavalier  ("c1", "blanc"));
-	this.location[7][6].ajouterPiece(new Cavalier  ("c1", "blanc"));
-	this.location[7][2].ajouterPiece(new Fou       ("f1", "blanc"));
-	this.location[7][5].ajouterPiece(new Fou       ("f1", "blanc"));
-	this.location[7][3].ajouterPiece(new Roi       ("k",  "blanc"));
-	this.location[7][4].ajouterPiece(new Reine     ("r",  "blanc"));
+	this.location[7][0].ajouterPiece(new Tour      ("t1", "noir"));
+	this.location[7][7].ajouterPiece(new Tour      ("t1", "noir"));
+	this.location[7][1].ajouterPiece(new Cavalier  ("c1", "noir"));
+	this.location[7][6].ajouterPiece(new Cavalier  ("c1", "noir"));
+	this.location[7][2].ajouterPiece(new Fou       ("f1", "noir"));
+	this.location[7][5].ajouterPiece(new Fou       ("f1", "noir"));
+	this.location[7][3].ajouterPiece(new Roi       ("r",  "noir"));
+	this.location[7][4].ajouterPiece(new Reine     ("d",  "noir"));
 
 
 }
