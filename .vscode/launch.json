@@ -6,23 +6,16 @@
     "configurations": [
         {
             "type": "java",
-            "name": "CodeLens (Launch) - Echiquier",
-            "request": "launch",
-            "mainClass": "Echiquier",
-            "console": "integratedTerminal"
-        },
-        {
-            "type": "java",
-            "name": "CodeLens (Launch) - Echiquier",
-            "request": "launch",
-            "mainClass": "projetSynthese.Echiquier",
-            "console": "integratedTerminal"
-        },
-        {
-            "type": "java",
             "name": "Debug (Launch) - Current File",
             "request": "launch",
             "mainClass": "${file}",
+            "console": "integratedTerminal"
+        },
+        {
+            "type": "java",
+            "name": "Debug (Launch)-FenetreJeu",
+            "request": "launch",
+            "mainClass": "projetSynthese.FenetreJeu",
             "console": "integratedTerminal"
         }
     ]

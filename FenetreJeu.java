@@ -14,7 +14,7 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 
 public class FenetreJeu extends JFrame
-  {
+{
   Echiquier e;        //echiquier
   JLabel [][] tab;    //tableau de JLabels
   
@@ -108,10 +108,10 @@ public class FenetreJeu extends JFrame
   
   // classe priv�e (interne) pour la gestion d'�v�nements
   private class GestionnaireEvenement extends MouseAdapter
-  {
+{
 
-  Piece pieceTampon;
-  Icon iconeTampon;
+  Piece pieceTampon=null;
+  ImageIcon iconeTampon=null;
   int ligneClic;
   int colonneClic;
   Position depart, arrivee;
@@ -146,86 +146,113 @@ public class FenetreJeu extends JFrame
       }
     champTexte.setText(couleurControle);
     }
-  else // donc a clique sur un Label
+  	else // donc a clique sur un Label
     {
-    //trouver lequel
-    for ( int i = 0; i < 8 ; i++ )
-      {
-      for ( int j = 0; j<8; j++ )
-        {
-        if (eve.getSource() == tab[i][j])
-          {
-          ligneClic = i;
-          colonneClic = j;
-          }
-        }
-      }
-    champTexte.setText(couleurControle);
-	
-	//SUIVRE LES �TAPES DU DOCUMENT FOURNI SUR L�A
-  if(e.getCase(ligneClic, colonneClic).estOccupee(couleurControle) && this.pieceTampon==null)  // 1er cas :
-	{
-    this.depart.setLigne(ligneClic);
-    this.depart.setColonne(colonneClic);
-    this.iconeTampon=tab[ligneClic][colonneClic].getIcon();
-    this.pieceTampon=e.getCase(ligneClic,colonneClic).getPiece();
-	//clique sur une case occupee , tampon vide : case Depart
-    //initialiser position depart
-    //prendre l'icone et la mettre dans le tampon, prendre la piece et la mettre dans le tampon
-    //enlever le tampon de la place d'origine
-	}
-	
-    // 2�me cas : clique sur une case vide ; tampon plein case d'arrivee, pas de pion en diagonale
-    else if(!e.getCase(ligneClic,colonneClic).estOccupee()&&this.pieceTampon!=null){
-		//initialiser position d'arriv�e
-     	arrivee.setLigne(ligneClic);
-      	arrivee.setColonne(colonneClic);
-	 		//v�rifier estValide(), exclue les pions en diagonale
-			if(this.pieceTampon.estValide(depart, arrivee)){
+		//trouver lequel
+		for ( int i = 0; i < 8 ; i++ )
+		{
+		for ( int j = 0; j<8; j++ )
+			{
+			if (eve.getSource() == tab[i][j])
+			{
+			ligneClic = i;
+			colonneClic = j;
+			}
+			}
+		}
+		champTexte.setText(couleurControle);
+			
+		//SUIVRE LES �TAPES DU DOCUMENT FOURNI SUR L�A
+		if(pieceTampon==null)  // 1er cas :
+		{
+		//clique sur une case occupee , tampon vide : case Depart
+			if(e.getCase(ligneClic, colonneClic).estOccupee(couleurControle))
+			{
+				//initialiser position depart
+				depart.setLigne(ligneClic);
+				depart.setColonne(colonneClic);
+				//prendre l'icone et la mettre dans le tampon, prendre la piece et la mettre dans le tampon
+				iconeTampon=(ImageIcon)tab[ligneClic][colonneClic].getIcon();
+				pieceTampon=e.getCase(ligneClic,colonneClic).getPiece();
+			}
+		//enlever le tampon de la place d'origine
+		}
+	// 2�me cas : clique sur une case vide ; tampon plein case d'arrivee, pas de pion en diagonale
+	else //tampon plein
+		{
+			if(!e.getCase(ligneClic,colonneClic).estOccupee())//destination vide
+			{
+			//initialiser position d'arriv�e
+				arrivee.setLigne(ligneClic);
+				arrivee.setColonne(colonneClic);
+				//v�rifier estValide(), exclue les pions en diagonale
+				if(pieceTampon.estValide(depart, arrivee))
+				{
 				//v�rifier cheminPossible()
-				if(e.cheminPossible(depart, arrivee)){
-				 //enlever la pi�ce du tampon et la mettre sur l'arriv�e
-				 	e.getCase(arrivee.getLigne(), arrivee.getColonne()).ajouterPiece(pieceTampon);
+				if(e.cheminPossible(depart, arrivee))
+					{
+				//enlever la pi�ce du tampon et la mettre sur l'arriv�e
+					e.getCase(arrivee.getLigne(), arrivee.getColonne()).ajouterPiece(pieceTampon);
 					//enlever d�finitivement la pi�ce du d�part
 					e.getCase(depart.getLigne(), depart.getColonne()).ajouterPiece(null);
 					//placer l'icone tampon sur la place d'arriv�e et l'enlever du tampon
-					tab[arrivee.getLigne()][arrivee.getColonne()].setIcon(this.iconeTampon);
+					tab[arrivee.getLigne()][arrivee.getColonne()].setIcon(iconeTampon);
 					tab[depart.getLigne()][depart.getColonne()].setIcon(null);
-					this.iconeTampon=null;
-					this.pieceTampon=null;
-	//� compl�ter
-          			alterne();//Change la couleur de la pi�ce
+					iconeTampon=null;
+					pieceTampon=null;
+			//� compl�ter
+					alterne();//Change la couleur de la pi�ce
+					}
+				}
 			}
+			else//destination occupée
+			{
+				arrivee.setLigne(ligneClic);
+				arrivee.setColonne(colonneClic);
+				if(!e.getCase(ligneClic, colonneClic).estOccupee(couleurControle)) 
+				{
+					if(pieceTampon.estValide(depart, arrivee))
+					{
+						if(e.cheminPossible(depart, arrivee))
+						{
+							e.getCase(arrivee.getLigne(), arrivee.getColonne()).ajouterPiece(pieceTampon);
+							//enlever d�finitivement la pi�ce du d�part
+							e.getCase(depart.getLigne(), depart.getColonne()).ajouterPiece(null);
+							//placer l'icone tampon sur la place d'arriv�e et l'enlever du tampon
+							tab[arrivee.getLigne()][arrivee.getColonne()].setIcon(iconeTampon);
+							tab[depart.getLigne()][depart.getColonne()].setIcon(null);
+							iconeTampon=null;
+							pieceTampon=null;
+							alterne();
+						}
+					}
+					else if (pieceTampon.getNom().charAt(0)=='p'&&e.captureParUnPionPossible(depart, arrivee))
+					{
+						e.getCase(arrivee.getLigne(), arrivee.getColonne()).ajouterPiece(pieceTampon);
+						//enlever d�finitivement la pi�ce du d�part
+						e.getCase(depart.getLigne(), depart.getColonne()).ajouterPiece(null);
+						//placer l'icone tampon sur la place d'arriv�e et l'enlever du tampon
+						tab[arrivee.getLigne()][arrivee.getColonne()].setIcon(iconeTampon);
+						tab[depart.getLigne()][depart.getColonne()].setIcon(null);
+						iconeTampon=null;
+						pieceTampon=null;
+						alterne();
+					}
+				}
+			}
+
 		}
-    }
+	}	
+
+
 	  
     // 3�me cas : clique sur une case occupee et tampon plein : case d'arrivee + pion en diagonale
     //� compl�ter
-	else if(e.getCase(ligneClic,colonneClic).getPiece()!=null&&this.pieceTampon!=null){
-		arrivee.setLigne(ligneClic);
-      	arrivee.setColonne(colonneClic);
-		  if(this.pieceTampon.estValide(depart, arrivee)){
-			if(e.cheminPossible(depart, arrivee)){
-          alterne();
-            }
-		}
-      //else //c'est peut etre un Pion en diagonale
-        {
-			{
-    //� compl�ter        
-          alterne();
-        }
-      }
-        
-      
-  }
   //else // 4e cas rien a faire tampon vide et case vide
-  else  {this.iconeTampon=null;
-		this.pieceTampon=null;
-    }
-    
-  }
-  }//Fin m�thode mouseClicked()
+    //this.iconeTampon=null;
+	//this.pieceTampon=null;
+}
+  //Fin m�thode mouseClicked()
   public void alterne ()
   {
   if (couleurControle == "blanc")
@@ -234,7 +261,7 @@ public class FenetreJeu extends JFrame
     couleurControle = "blanc";
   }
 
-}//Fin classe interne
+	}//Fin classe interne
 }//Fin FenetreJeu
 
 

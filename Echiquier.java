@@ -75,16 +75,6 @@ public boolean cheminPossible ( Position  depart , Position arrivee)
 	if(depart==arrivee){
 		return true;
 	}
-	Piece pieceChoisie=this.getCase(depart.getColonne(),depart.getLigne()).getPiece();
-	if(!pieceChoisie.estValide(depart,arrivee))
-	{
-		return false;
-	}
-
-	if(this.getCase(arrivee.getColonne(),arrivee.getLigne()).estOccupee())
-	{
-		return false;
-	}
 
 	if (pieceChoisie.getNom().charAt(0)=='p'&&pieceChoisie.norme(depart,arrivee)==2){
 		return captureParUnPionPossible(depart, arrivee);
