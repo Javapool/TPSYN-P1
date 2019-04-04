@@ -216,9 +216,9 @@ public class FenetreJeu extends JFrame
 				arrivee.setColonne(colonneClic);
 				if(!e.getCase(ligneClic, colonneClic).estOccupee(couleurControle))
 				{
-					if(pieceTampon.estValide(depart, arrivee)&&pieceTampon.getNom().charAt(0)!='p')
+					if(pieceTampon.estValide(depart, arrivee))
 					{
-						if(e.cheminPossible(depart, arrivee)||pieceTampon.getNom().charAt(0)!='c')
+          if(e.cheminPossible(depart, arrivee))
 						{
 							e.getCase(arrivee.getLigne(), arrivee.getColonne()).ajouterPiece(pieceTampon);
 							//enlever d�finitivement la pi�ce du d�part

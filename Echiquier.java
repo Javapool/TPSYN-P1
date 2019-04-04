@@ -59,8 +59,7 @@ return this.location[ligne][colonne];
 //M�thode � compl�ter
 public boolean captureParUnPionPossible ( Position depart,Position arrivee )
   {
-		Piece pieceChoisie=new Piece();
-		pieceChoisie=this.getCase(depart.getColonne(),depart.getLigne()).getPiece();
+		this.getCase(depart.getColonne(),depart.getLigne()).getPiece();
 
 				if (this.getCase(arrivee.getColonne(),arrivee.getLigne()).getPiece()!=null&&
 				this.getCase(arrivee.getColonne(),arrivee.getLigne()).getPiece().getCouleur()!=pieceChoisie.getCouleur()){
@@ -73,12 +72,10 @@ public boolean captureParUnPionPossible ( Position depart,Position arrivee )
 //M�thode � compl�ter
 public boolean cheminPossible ( Position  depart , Position arrivee)
 {
-	/* if(depart==arrivee){
+	if(depart==arrivee){
 		return true;
 	}
-
-	pieceChoisie=this.getCase(depart.getColonne(),depart.getLigne()).getPiece();
-
+	/*
 	if (pieceChoisie.getNom().charAt(0)=='p'&&pieceChoisie.norme(depart,arrivee)==2){
 		return captureParUnPionPossible(depart, arrivee);
 	}
@@ -89,7 +86,7 @@ public boolean cheminPossible ( Position  depart , Position arrivee)
 			return false;
 		}
 	} */
-	if(getCase(depart.getColonne(),depart.getLigne()).getPiece().getNom().charAt(0)!='c')
+	if((this.getCase(depart.getLigne(),depart.getColonne()).getPiece().getNom().charAt(0))!='c')
 	{
 		//abs() retourne la valeur absolue d'un nombre(voir définition à la fin d'échiquier)
 		int Vecteurx=(arrivee.getColonne()-depart.getColonne());
@@ -113,7 +110,7 @@ public boolean cheminPossible ( Position  depart , Position arrivee)
 
 		//valide chaque case entre départ et arrivée pour voir si le chemin est bloqué
 		for (int i = 1; i < valeurMax; i++) {
-			if(this.getCase(depart.getColonne()+(i*Signex), depart.getLigne()+(i*Signey)).getPiece()!=null)
+			if(this.getCase(depart.getLigne()+(i*Signey), depart.getColonne()+(i*Signex)).getPiece()!=null)
 			{
 				return false;
 			}
@@ -127,7 +124,7 @@ public void afficher()
 	System.out.println();
 	for (int i = 0; i < HAUT_BOARD; i++) {
 		for (int j = 0; j < LARG_BOARD; j++) {
-			if(this.getCase(i,j).getPiece()!=null)
+			if(getCase(i,j).getPiece()!=null)
 			{
 				System.out.printf("%5s",this.getCase(i,j).getPiece().getNom());
 			}
