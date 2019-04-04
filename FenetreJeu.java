@@ -17,11 +17,11 @@ public class FenetreJeu extends JFrame
 {
   Echiquier e;        //echiquier
   JLabel [][] tab;    //tableau de JLabels
-  
+
   JPanel jPanel1 = new JPanel();  // panel du haut
   JPanel jPanel2 = new JPanel();  // panel du bas ( grille )
   GridLayout gridLayout1 = new GridLayout();
-  
+
   JButton boutonDebuter = new JButton();
   JTextField champTexte = new JTextField();
 
@@ -41,11 +41,11 @@ public class FenetreJeu extends JFrame
   private void jbInit() throws Exception
   {
 
-  
+
     tab = new JLabel[8][8];   // cr�ation du tableau de JLabel
     e = new Echiquier();      // cr�ation de l'�chiquier
 
-    
+
     this.getContentPane().setLayout(null);
     this.setSize(new Dimension(568, 585));
     this.setTitle("Jeu d'Echecs");
@@ -62,11 +62,11 @@ public class FenetreJeu extends JFrame
     jPanel1.add(boutonDebuter, null);
     this.getContentPane().add(jPanel1, null);
 
-   
+
     boutonDebuter.setBounds(new Rectangle(15, 10, 130, 25));
     boutonDebuter.setText("DEBUTER");
 
-   
+
     champTexte.setBounds(new Rectangle(160, 10, 320, 25));
 
 
@@ -75,7 +75,7 @@ public class FenetreJeu extends JFrame
     GestionnaireEvenement gest = new GestionnaireEvenement ();
     boutonDebuter.addMouseListener(gest);
 
-    
+
     for ( int i = 0; i <8; i++ )
       {
       for ( int j = 0; j <8 ; j++ )
@@ -86,7 +86,7 @@ public class FenetreJeu extends JFrame
         tab[i][j].setHorizontalAlignment(SwingConstants.CENTER);  // pour que les pieces apparaissent au centre de la case
         tab[i][j].addMouseListener(gest);  // ajouter l'�couteur aux sources
 
-        
+
         if ( (i+j) % 2 == 0 )
           tab[i][j].setBackground(Color.lightGray );  //couleur des cases
         else
@@ -104,8 +104,8 @@ public class FenetreJeu extends JFrame
   j.setLocation(100, 130);
   j.setDefaultCloseOperation(EXIT_ON_CLOSE);  // ferme le processus associ�
   }
-  
-  
+
+
   // classe priv�e (interne) pour la gestion d'�v�nements
   private class GestionnaireEvenement extends MouseAdapter
 {
@@ -116,33 +116,36 @@ public class FenetreJeu extends JFrame
   int colonneClic;
   Position depart, arrivee;
   String couleurControle = "blanc";
-  public void mouseClicked(MouseEvent eve)
+  public void mouseReleased(MouseEvent eve)
   {
   if ( eve.getSource() == boutonDebuter )
     {
     e.debuter();
-    tab[0][0].setIcon ( new ImageIcon ("C:\\Temp\\Icones\\TB.gif"));
-    tab[0][1].setIcon ( new ImageIcon ("C:\\Temp\\Icones\\CB.gif"));
-    tab[0][2].setIcon ( new ImageIcon ("C:\\Temp\\Icones\\FB.gif"));
-    tab[0][3].setIcon ( new ImageIcon ("C:\\Temp\\Icones\\RB.gif"));
-    tab[0][4].setIcon ( new ImageIcon ("C:\\Temp\\Icones\\DB.gif"));
-    tab[0][5].setIcon ( new ImageIcon ("C:\\Temp\\Icones\\FB.gif"));
-    tab[0][6].setIcon ( new ImageIcon ("C:\\Temp\\Icones\\CB.gif"));
-    tab[0][7].setIcon ( new ImageIcon ("C:\\Temp\\Icones\\TB.gif"));
-    tab[7][0].setIcon ( new ImageIcon ("C:\\Temp\\Icones\\TN.gif"));
-    tab[7][1].setIcon ( new ImageIcon ("C:\\Temp\\Icones\\CN.gif"));
-    tab[7][2].setIcon ( new ImageIcon ("C:\\Temp\\Icones\\FN.gif"));
-    tab[7][3].setIcon ( new ImageIcon ("C:\\Temp\\Icones\\RN.gif"));
-    tab[7][4].setIcon ( new ImageIcon ("C:\\Temp\\Icones\\DN.gif"));
-    tab[7][5].setIcon ( new ImageIcon ("C:\\Temp\\Icones\\FN.gif"));
-    tab[7][6].setIcon ( new ImageIcon ("C:\\Temp\\Icones\\CN.gif"));
-    tab[7][7].setIcon ( new ImageIcon ("C:\\Temp\\Icones\\TN.gif"));
+    pieceTampon=null;
+    iconeTampon=null;
+    couleurControle="blanc";
+    tab[0][0].setIcon ( new ImageIcon ("img\\TB.gif"));
+    tab[0][1].setIcon ( new ImageIcon ("img\\CB.gif"));
+    tab[0][2].setIcon ( new ImageIcon ("img\\FB.gif"));
+    tab[0][3].setIcon ( new ImageIcon ("img\\RB.gif"));
+    tab[0][4].setIcon ( new ImageIcon ("img\\DB.gif"));
+    tab[0][5].setIcon ( new ImageIcon ("img\\FB.gif"));
+    tab[0][6].setIcon ( new ImageIcon ("img\\CB.gif"));
+    tab[0][7].setIcon ( new ImageIcon ("img\\TB.gif"));
+    tab[7][0].setIcon ( new ImageIcon ("img\\TN.gif"));
+    tab[7][1].setIcon ( new ImageIcon ("img\\CN.gif"));
+    tab[7][2].setIcon ( new ImageIcon ("img\\FN.gif"));
+    tab[7][3].setIcon ( new ImageIcon ("img\\RN.gif"));
+    tab[7][4].setIcon ( new ImageIcon ("img\\DN.gif"));
+    tab[7][5].setIcon ( new ImageIcon ("img\\FN.gif"));
+    tab[7][6].setIcon ( new ImageIcon ("img\\CN.gif"));
+    tab[7][7].setIcon ( new ImageIcon ("img\\TN.gif"));
 
     //Pions
     for ( int i = 0; i <8; i++ )
       {
-      tab[1][i].setIcon(new ImageIcon("C:\\Temp\\Icones\\PB.gif"));
-      tab[6][i].setIcon(new ImageIcon("C:\\Temp\\Icones\\PN.gif"));
+      tab[1][i].setIcon(new ImageIcon("img\\PB.gif"));
+      tab[6][i].setIcon(new ImageIcon("img\\PN.gif"));
       }
     champTexte.setText(couleurControle);
     }
@@ -161,7 +164,7 @@ public class FenetreJeu extends JFrame
 			}
 		}
 		champTexte.setText(couleurControle);
-			
+
 		//SUIVRE LES �TAPES DU DOCUMENT FOURNI SUR L�A
 		if(pieceTampon==null)  // 1er cas :
 		{
@@ -169,11 +172,13 @@ public class FenetreJeu extends JFrame
 			if(e.getCase(ligneClic, colonneClic).estOccupee(couleurControle))
 			{
 				//initialiser position depart
-				depart.setLigne(ligneClic);
-				depart.setColonne(colonneClic);
+				depart=new Position(ligneClic,colonneClic);
 				//prendre l'icone et la mettre dans le tampon, prendre la piece et la mettre dans le tampon
-				iconeTampon=(ImageIcon)tab[ligneClic][colonneClic].getIcon();
-				pieceTampon=e.getCase(ligneClic,colonneClic).getPiece();
+				iconeTampon=new ImageIcon(tab[ligneClic][colonneClic].getIcon().toString());
+        pieceTampon=e.getCase(ligneClic,colonneClic).getPiece();
+        e.getCase(ligneClic, colonneClic).enleverPiece();
+        tab[ligneClic][colonneClic].setIcon(null);
+
 			}
 		//enlever le tampon de la place d'origine
 		}
@@ -183,25 +188,25 @@ public class FenetreJeu extends JFrame
 			if(!e.getCase(ligneClic,colonneClic).estOccupee())//destination vide
 			{
 			//initialiser position d'arriv�e
-				arrivee.setLigne(ligneClic);
-				arrivee.setColonne(colonneClic);
+        arrivee=new Position(ligneClic, colonneClic);
 				//v�rifier estValide(), exclue les pions en diagonale
 				if(pieceTampon.estValide(depart, arrivee))
 				{
 				//v�rifier cheminPossible()
-				if(e.cheminPossible(depart, arrivee))
+				  if(e.cheminPossible(depart, arrivee))
 					{
 				//enlever la pi�ce du tampon et la mettre sur l'arriv�e
 					e.getCase(arrivee.getLigne(), arrivee.getColonne()).ajouterPiece(pieceTampon);
 					//enlever d�finitivement la pi�ce du d�part
-					e.getCase(depart.getLigne(), depart.getColonne()).ajouterPiece(null);
+					e.getCase(depart.getLigne(), depart.getColonne()).enleverPiece();
 					//placer l'icone tampon sur la place d'arriv�e et l'enlever du tampon
 					tab[arrivee.getLigne()][arrivee.getColonne()].setIcon(iconeTampon);
 					tab[depart.getLigne()][depart.getColonne()].setIcon(null);
 					iconeTampon=null;
 					pieceTampon=null;
 			//� compl�ter
-					alterne();//Change la couleur de la pi�ce
+          alterne();//Change la couleur de la pi�ce
+          champTexte.setText(couleurControle);
 					}
 				}
 			}
@@ -209,11 +214,11 @@ public class FenetreJeu extends JFrame
 			{
 				arrivee.setLigne(ligneClic);
 				arrivee.setColonne(colonneClic);
-				if(!e.getCase(ligneClic, colonneClic).estOccupee(couleurControle)) 
+				if(!e.getCase(ligneClic, colonneClic).estOccupee(couleurControle))
 				{
-					if(pieceTampon.estValide(depart, arrivee))
+					if(pieceTampon.estValide(depart, arrivee)&&pieceTampon.getNom().charAt(0)!='p')
 					{
-						if(e.cheminPossible(depart, arrivee))
+						if(e.cheminPossible(depart, arrivee)||pieceTampon.getNom().charAt(0)!='c')
 						{
 							e.getCase(arrivee.getLigne(), arrivee.getColonne()).ajouterPiece(pieceTampon);
 							//enlever d�finitivement la pi�ce du d�part
@@ -223,7 +228,8 @@ public class FenetreJeu extends JFrame
 							tab[depart.getLigne()][depart.getColonne()].setIcon(null);
 							iconeTampon=null;
 							pieceTampon=null;
-							alterne();
+              alterne();
+              champTexte.setText(couleurControle);
 						}
 					}
 					else if (pieceTampon.getNom().charAt(0)=='p'&&e.captureParUnPionPossible(depart, arrivee))
@@ -236,16 +242,17 @@ public class FenetreJeu extends JFrame
 						tab[depart.getLigne()][depart.getColonne()].setIcon(null);
 						iconeTampon=null;
 						pieceTampon=null;
-						alterne();
+            alterne();
+            champTexte.setText(couleurControle);
 					}
 				}
 			}
 
 		}
-	}	
+	}
 
 
-	  
+
     // 3�me cas : clique sur une case occupee et tampon plein : case d'arrivee + pion en diagonale
     //� compl�ter
   //else // 4e cas rien a faire tampon vide et case vide
@@ -263,12 +270,3 @@ public class FenetreJeu extends JFrame
 
 	}//Fin classe interne
 }//Fin FenetreJeu
-
-
-
-
-
-
-
-
-

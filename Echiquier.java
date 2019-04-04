@@ -24,8 +24,8 @@ public void debuter()
 
   for (int k=0; k < 8; k++)
   {
-	this.location[1][k].ajouterPiece(new Pion("p" + String.valueOf(k+1), "noir"));
-	this.location[6][k].ajouterPiece(new Pion("p" + String.valueOf(k+1), "blanc"));
+	this.location[1][k].ajouterPiece(new Pion("p" + String.valueOf(k+1), "blanc"));
+	this.location[6][k].ajouterPiece(new Pion("p" + String.valueOf(k+1), "noir"));
 //Autres pions
   }
   this.location[0][0].ajouterPiece(new Tour        ("t1", "blanc"));
@@ -59,7 +59,8 @@ return this.location[ligne][colonne];
 //M�thode � compl�ter
 public boolean captureParUnPionPossible ( Position depart,Position arrivee )
   {
-		Piece pieceChoisie=this.getCase(depart.getColonne(),depart.getLigne()).getPiece();
+		Piece pieceChoisie=new Piece();
+		pieceChoisie=this.getCase(depart.getColonne(),depart.getLigne()).getPiece();
 
 				if (this.getCase(arrivee.getColonne(),arrivee.getLigne()).getPiece()!=null&&
 				this.getCase(arrivee.getColonne(),arrivee.getLigne()).getPiece().getCouleur()!=pieceChoisie.getCouleur()){
@@ -72,9 +73,11 @@ public boolean captureParUnPionPossible ( Position depart,Position arrivee )
 //M�thode � compl�ter
 public boolean cheminPossible ( Position  depart , Position arrivee)
 {
-	if(depart==arrivee){
+	/* if(depart==arrivee){
 		return true;
 	}
+
+	pieceChoisie=this.getCase(depart.getColonne(),depart.getLigne()).getPiece();
 
 	if (pieceChoisie.getNom().charAt(0)=='p'&&pieceChoisie.norme(depart,arrivee)==2){
 		return captureParUnPionPossible(depart, arrivee);
@@ -85,8 +88,8 @@ public boolean cheminPossible ( Position  depart , Position arrivee)
 		{
 			return false;
 		}
-	}
-	else if(pieceChoisie.getNom().charAt(0)!='c')
+	} */
+	if(getCase(depart.getColonne(),depart.getLigne()).getPiece().getNom().charAt(0)!='c')
 	{
 		//abs() retourne la valeur absolue d'un nombre(voir définition à la fin d'échiquier)
 		int Vecteurx=(arrivee.getColonne()-depart.getColonne());

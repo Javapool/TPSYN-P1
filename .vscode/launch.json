@@ -6,16 +6,15 @@
     "configurations": [
         {
             "type": "java",
-            "name": "Debug (Launch) - Current File",
+            "name": "CodeLens (Launch) - FenetreJeu",
             "request": "launch",
-            "mainClass": "${file}",
-            "console": "integratedTerminal"
+            "mainClass": "FenetreJeu"
         },
         {
             "type": "java",
-            "name": "Debug (Launch)-FenetreJeu",
+            "name": "Debug (Launch) - Current File",
             "request": "launch",
-            "mainClass": "projetSynthese.FenetreJeu",
+            "mainClass": "${file}",
             "console": "integratedTerminal"
         }
     ]
