@@ -4,8 +4,7 @@ public class Echiquier implements MethodesEchiquier {
 private static final int HAUT_BOARD=8;
 private static final int LARG_BOARD=8;
 
-
-private Case location [][]=new Case[HAUT_BOARD][LARG_BOARD];
+Case location [][]=new Case[HAUT_BOARD][LARG_BOARD];
 
 public Echiquier()
   {

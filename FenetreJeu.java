@@ -188,21 +188,21 @@ public class FenetreJeu extends JFrame
 				//v�rifier estValide(), exclue les pions en diagonale
 				if(pieceTampon.estValide(depart, arrivee))
 				{
-				//v�rifier cheminPossible()
-				if(e.cheminPossible(depart, arrivee))
-					{
-				//enlever la pi�ce du tampon et la mettre sur l'arriv�e
-					e.getCase(arrivee.getLigne(), arrivee.getColonne()).ajouterPiece(pieceTampon);
-					//enlever d�finitivement la pi�ce du d�part
-					e.getCase(depart.getLigne(), depart.getColonne()).ajouterPiece(null);
-					//placer l'icone tampon sur la place d'arriv�e et l'enlever du tampon
-					tab[arrivee.getLigne()][arrivee.getColonne()].setIcon(iconeTampon);
-					tab[depart.getLigne()][depart.getColonne()].setIcon(null);
-					iconeTampon=null;
-					pieceTampon=null;
-			//� compl�ter
-					alterne();//Change la couleur de la pi�ce
-					}
+          //v�rifier cheminPossible()
+          if(e.cheminPossible(depart, arrivee))
+          {
+        //enlever la pi�ce du tampon et la mettre sur l'arriv�e
+          e.getCase(arrivee.getLigne(), arrivee.getColonne()).ajouterPiece(pieceTampon);
+          //enlever d�finitivement la pi�ce du d�part
+          e.getCase(depart.getLigne(), depart.getColonne()).ajouterPiece(null);
+          //placer l'icone tampon sur la place d'arriv�e et l'enlever du tampon
+          tab[arrivee.getLigne()][arrivee.getColonne()].setIcon(iconeTampon);
+          tab[depart.getLigne()][depart.getColonne()].setIcon(null);
+          iconeTampon=null;
+          pieceTampon=null;
+      //� compl�ter
+          alterne();//Change la couleur de la pi�ce
+          }
 				}
 			}
 			else//destination occupée
@@ -234,12 +234,13 @@ public class FenetreJeu extends JFrame
 						//placer l'icone tampon sur la place d'arriv�e et l'enlever du tampon
 						tab[arrivee.getLigne()][arrivee.getColonne()].setIcon(iconeTampon);
 						tab[depart.getLigne()][depart.getColonne()].setIcon(null);
-						iconeTampon=null;
-						pieceTampon=null;
+				
 						alterne();
 					}
 				}
-			}
+      }
+      iconeTampon=null;
+      pieceTampon=null;
 
 		}
 	}	
